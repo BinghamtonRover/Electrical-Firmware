@@ -8,4 +8,4 @@ class CurrentSensor {
 		CurrentSensor(int pin);
 		void setup();
 		float getCurrent();
-}
+};
