@@ -16,4 +16,3 @@ PB_BIND(ElectricalData, ElectricalData, AUTO)
 
 
 
-
