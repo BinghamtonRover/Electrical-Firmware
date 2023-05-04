@@ -3,24 +3,16 @@
 
 #ifndef PB_ELECTRICAL_PB_H_INCLUDED
 #define PB_ELECTRICAL_PB_H_INCLUDED
-#include <pb.h>
+#include "utils/pb.h"
+#include "core.pb.h"
 
 #if PB_PROTO_HEADER_VERSION != 40
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-/* Enum definitions */
-/* OFF is only available via a hardware button */
-typedef enum _RoverMode {
-    RoverMode_POWER_MODE_UNDEFINED = 0,
-    RoverMode_OFF = 1,
-    RoverMode_IDLE = 2, /* Yellow LEDs */
-    RoverMode_ACTIVE = 3 /* Green LEDs */
-} RoverMode;
-
 /* Struct definitions */
 typedef struct _ElectricalCommand {
-    RoverMode mode;
+    RoverStatus status;
 } ElectricalCommand;
 
 typedef struct _PowerSourceStatus {
@@ -41,7 +33,7 @@ typedef struct _ElectricalData { /* PowerSourceStatus v5 = 1;
     float battery_current;
     float battery_voltage;
     float battery_temperature;
-    RoverMode mode;
+    RoverStatus status;
 } ElectricalData;
 
 
@@ -49,27 +41,16 @@ typedef struct _ElectricalData { /* PowerSourceStatus v5 = 1;
 extern "C" {
 #endif
 
-/* Helper constants for enums */
-#define _RoverMode_MIN RoverMode_POWER_MODE_UNDEFINED
-#define _RoverMode_MAX RoverMode_ACTIVE
-#define _RoverMode_ARRAYSIZE ((RoverMode)(RoverMode_ACTIVE+1))
-
-#define ElectricalCommand_mode_ENUMTYPE RoverMode
-
-
-#define ElectricalData_mode_ENUMTYPE RoverMode
-
-
 /* Initializer values for message structs */
-#define ElectricalCommand_init_default           {_RoverMode_MIN}
+#define ElectricalCommand_init_default           {_RoverStatus_MIN}
 #define PowerSourceStatus_init_default           {0, 0, 0}
-#define ElectricalData_init_default              {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverMode_MIN}
-#define ElectricalCommand_init_zero              {_RoverMode_MIN}
+#define ElectricalData_init_default              {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverStatus_MIN}
+#define ElectricalCommand_init_zero              {_RoverStatus_MIN}
 #define PowerSourceStatus_init_zero              {0, 0, 0}
-#define ElectricalData_init_zero                 {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverMode_MIN}
+#define ElectricalData_init_zero                 {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverStatus_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
-#define ElectricalCommand_mode_tag               10
+#define ElectricalCommand_status_tag             10
 #define PowerSourceStatus_current_tag            1
 #define PowerSourceStatus_voltage_tag            2
 #define PowerSourceStatus_temperature_tag        3
@@ -82,11 +63,11 @@ extern "C" {
 #define ElectricalData_battery_current_tag       7
 #define ElectricalData_battery_voltage_tag       8
 #define ElectricalData_battery_temperature_tag   9
-#define ElectricalData_mode_tag                  10
+#define ElectricalData_status_tag                10
 
 /* Struct field encoding specification for nanopb */
 #define ElectricalCommand_FIELDLIST(X, a) \
-X(a, STATIC,   SINGULAR, UENUM,    mode,             10)
+X(a, STATIC,   SINGULAR, UENUM,    status,           10)
 #define ElectricalCommand_CALLBACK NULL
 #define ElectricalCommand_DEFAULT NULL
 
@@ -107,7 +88,7 @@ X(a, STATIC,   SINGULAR, FLOAT,    v12_temperature,   6) \
 X(a, STATIC,   SINGULAR, FLOAT,    battery_current,   7) \
 X(a, STATIC,   SINGULAR, FLOAT,    battery_voltage,   8) \
 X(a, STATIC,   SINGULAR, FLOAT,    battery_temperature,   9) \
-X(a, STATIC,   SINGULAR, UENUM,    mode,             10)
+X(a, STATIC,   SINGULAR, UENUM,    status,           10)
 #define ElectricalData_CALLBACK NULL
 #define ElectricalData_DEFAULT NULL
 
