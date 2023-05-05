@@ -13,3 +13,6 @@ PB_BIND(PowerSourceStatus, PowerSourceStatus, AUTO)
 
 
 PB_BIND(ElectricalData, ElectricalData, AUTO)
+
+
+

@@ -33,7 +33,6 @@ typedef struct _ElectricalData { /* PowerSourceStatus v5 = 1;
     float battery_current;
     float battery_voltage;
     float battery_temperature;
-    RoverStatus status;
 } ElectricalData;
 
 
@@ -44,10 +43,10 @@ extern "C" {
 /* Initializer values for message structs */
 #define ElectricalCommand_init_default           {_RoverStatus_MIN}
 #define PowerSourceStatus_init_default           {0, 0, 0}
-#define ElectricalData_init_default              {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverStatus_MIN}
+#define ElectricalData_init_default              {0, 0, 0, 0, 0, 0, 0, 0, 0}
 #define ElectricalCommand_init_zero              {_RoverStatus_MIN}
 #define PowerSourceStatus_init_zero              {0, 0, 0}
-#define ElectricalData_init_zero                 {0, 0, 0, 0, 0, 0, 0, 0, 0, _RoverStatus_MIN}
+#define ElectricalData_init_zero                 {0, 0, 0, 0, 0, 0, 0, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define ElectricalCommand_status_tag             10
@@ -63,7 +62,6 @@ extern "C" {
 #define ElectricalData_battery_current_tag       7
 #define ElectricalData_battery_voltage_tag       8
 #define ElectricalData_battery_temperature_tag   9
-#define ElectricalData_status_tag                10
 
 /* Struct field encoding specification for nanopb */
 #define ElectricalCommand_FIELDLIST(X, a) \
@@ -87,8 +85,7 @@ X(a, STATIC,   SINGULAR, FLOAT,    v12_voltage,       5) \
 X(a, STATIC,   SINGULAR, FLOAT,    v12_temperature,   6) \
 X(a, STATIC,   SINGULAR, FLOAT,    battery_current,   7) \
 X(a, STATIC,   SINGULAR, FLOAT,    battery_voltage,   8) \
-X(a, STATIC,   SINGULAR, FLOAT,    battery_temperature,   9) \
-X(a, STATIC,   SINGULAR, UENUM,    status,           10)
+X(a, STATIC,   SINGULAR, FLOAT,    battery_temperature,   9)
 #define ElectricalData_CALLBACK NULL
 #define ElectricalData_DEFAULT NULL
 
@@ -103,7 +100,7 @@ extern const pb_msgdesc_t ElectricalData_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define ElectricalCommand_size                   2
-#define ElectricalData_size                      47
+#define ElectricalData_size                      45
 #define PowerSourceStatus_size                   15
 
 #ifdef __cplusplus
