@@ -4,6 +4,3 @@
 [submodule "Electrical/src/utils"]
 	path = Electrical/src/utils
 	url = https://github.com/BinghamtonRover/Firmware-Utilities
-[submodule "electrical/src/utils"]
-	path = electrical/src/utils
-	url = https://github.com/BinghamtonRover/Firmware-Utilities
