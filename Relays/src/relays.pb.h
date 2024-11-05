@@ -19,7 +19,6 @@ typedef struct _RelaysCommand {
     BoolState arm;
     BoolState science;
     BoolState drive;
-    BoolState bypass;
 } RelaysCommand;
 
 typedef struct _RelaysData {
@@ -30,7 +29,6 @@ typedef struct _RelaysData {
     BoolState arm;
     BoolState science;
     BoolState drive;
-    BoolState bypass;
     BoolState mechanicalOverride;
 } RelaysData;
 
@@ -40,10 +38,10 @@ extern "C" {
 #endif
 
 /* Initializer values for message structs */
-#define RelaysCommand_init_default               {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
-#define RelaysData_init_default                  {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
-#define RelaysCommand_init_zero                  {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
-#define RelaysData_init_zero                     {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
+#define RelaysCommand_init_default               {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
+#define RelaysData_init_default                  {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
+#define RelaysCommand_init_zero                  {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
+#define RelaysData_init_zero                     {_BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN, _BoolState_MIN}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define RelaysCommand_backLeftMotor_tag          1
@@ -53,7 +51,6 @@ extern "C" {
 #define RelaysCommand_arm_tag                    5
 #define RelaysCommand_science_tag                6
 #define RelaysCommand_drive_tag                  7
-#define RelaysCommand_bypass_tag                 8
 #define RelaysData_backLeftMotor_tag             1
 #define RelaysData_backRightMotor_tag            2
 #define RelaysData_frontLeftMotor_tag            3
@@ -61,8 +58,7 @@ extern "C" {
 #define RelaysData_arm_tag                       5
 #define RelaysData_science_tag                   6
 #define RelaysData_drive_tag                     7
-#define RelaysData_bypass_tag                    8
-#define RelaysData_mechanicalOverride_tag        9
+#define RelaysData_mechanicalOverride_tag        8
 
 /* Struct field encoding specification for nanopb */
 #define RelaysCommand_FIELDLIST(X, a) \
@@ -72,8 +68,7 @@ X(a, STATIC,   SINGULAR, UENUM,    frontLeftMotor,    3) \
 X(a, STATIC,   SINGULAR, UENUM,    frontRightMotor,   4) \
 X(a, STATIC,   SINGULAR, UENUM,    arm,               5) \
 X(a, STATIC,   SINGULAR, UENUM,    science,           6) \
-X(a, STATIC,   SINGULAR, UENUM,    drive,             7) \
-X(a, STATIC,   SINGULAR, UENUM,    bypass,            8)
+X(a, STATIC,   SINGULAR, UENUM,    drive,             7)
 #define RelaysCommand_CALLBACK NULL
 #define RelaysCommand_DEFAULT NULL
 
@@ -85,8 +80,7 @@ X(a, STATIC,   SINGULAR, UENUM,    frontRightMotor,   4) \
 X(a, STATIC,   SINGULAR, UENUM,    arm,               5) \
 X(a, STATIC,   SINGULAR, UENUM,    science,           6) \
 X(a, STATIC,   SINGULAR, UENUM,    drive,             7) \
-X(a, STATIC,   SINGULAR, UENUM,    bypass,            8) \
-X(a, STATIC,   SINGULAR, UENUM,    mechanicalOverride,   9)
+X(a, STATIC,   SINGULAR, UENUM,    mechanicalOverride,   8)
 #define RelaysData_CALLBACK NULL
 #define RelaysData_DEFAULT NULL
 
@@ -99,8 +93,8 @@ extern const pb_msgdesc_t RelaysData_msg;
 
 /* Maximum encoded size of messages (where known) */
 #define RELAYS_PB_H_MAX_SIZE                     RelaysData_size
-#define RelaysCommand_size                       16
-#define RelaysData_size                          18
+#define RelaysCommand_size                       14
+#define RelaysData_size                          16
 
 #ifdef __cplusplus
 } /* extern "C" */
