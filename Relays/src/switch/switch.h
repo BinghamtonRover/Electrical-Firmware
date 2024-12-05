@@ -23,10 +23,6 @@ const int scienceLedPin = 29;
 const int driveRelayPin = 35;
 const int driveLedPin = 30;
 
-// // Override
-// const int overrideSwitchPin = 32;
-// const int overrideOutPin = 33;
-
 /// @brief Class to represent a relay on the relay board
 ///
 /// Use this class to represent a relay on the relay board. It reads the
@@ -114,19 +110,5 @@ class Relays {
         /// Sends each relay the relevant command to update the relay's software state
         void handleCommand(RelaysCommand command);
 };
-
-// class OverrideSwitch {
-//     private:
-//         int switchPin;
-//     public:
-//         OverrideSwitch(int switchPin) : 
-//             switchPin(switchPin) 
-//             { }
-//         void setup();
-//         bool checkPhysical();
-//         bool overrideState;
-
-// };
-
 
 #endif
