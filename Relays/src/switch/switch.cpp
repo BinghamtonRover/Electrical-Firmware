@@ -2,7 +2,6 @@
 
 void Relay::setup() {
     pinMode(relayPin, OUTPUT);
-    pinMode(ledPin, OUTPUT);
 }
 
 void Relay::update() {
@@ -15,13 +14,11 @@ void Relay::update() {
 
 void Relay::turnOn() { 
     digitalWrite(relayPin, HIGH);
-    digitalWrite(ledPin, HIGH);
     relayData = BoolState_ON;
 }
 
 void Relay::turnOff() {
     digitalWrite(relayPin, LOW);
-    digitalWrite(ledPin, LOW);
     relayData = BoolState_OFF;
 }
 
@@ -39,6 +36,8 @@ void Relay::handleCommand(BoolState command) {
 }
 
 void Relays::setup() {
+    pinMode(errorLED, OUTPUT);
+    digitalWrite(errorLED, HIGH);
     delay(250);
 
     backLeftMotor.setup();
@@ -68,7 +67,6 @@ void Relays::setup() {
     drive.setup();
     Serial.println("Drive relay initialized");
     delay(250);
-    
 }
 
 void Relays::update() {
@@ -79,6 +77,7 @@ void Relays::update() {
     arm.update();
     science.update();
     drive.update();
+    updateError();
 }
 
 void Relays::handleCommand(RelaysCommand command) {
@@ -89,6 +88,22 @@ void Relays::handleCommand(RelaysCommand command) {
     arm.handleCommand(command.arm);
     science.handleCommand(command.science);
     drive.handleCommand(command.drive);
+}
+
+void Relays::updateError() {
+    if (data.backLeftMotor ==  BoolState_OFF  ||
+        data.backRightMotor == BoolState_OFF  ||
+        data.frontLeftMotor == BoolState_OFF  ||
+        data.frontRightMotor == BoolState_OFF ||
+        data.arm == BoolState_OFF             ||
+        data.science == BoolState_OFF         ||
+        data.drive == BoolState_OFF) 
+    {
+        digitalWrite(errorLED, HIGH);
+    }
+    else {
+        digitalWrite(errorLED, LOW);
+    }
 }
 
 // void OverrideSwitch::setup() {

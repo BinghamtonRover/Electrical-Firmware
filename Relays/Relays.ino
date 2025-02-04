@@ -19,12 +19,50 @@ void setup() {
     relays.setup();
 
     Serial.println("Relays subsystem initialized");
+
+    // Testing:
+    // Flash Error Pin:
+    
+    // digitalWrite(errorPin, HIGH);
+    // delay(1000);
+    // digitalWrite(errorPin, LOW);
+
+    // Test Relays:
+    delay(1000);
+    Serial.println("Activating Right Rear Motor");
+    relays.backRightMotor.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Left Rear Motor");
+    relays.backLeftMotor.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Right Front Motor");
+    relays.frontRightMotor.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Left Front Motor");
+    relays.frontLeftMotor.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Science");
+    relays.science.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Drive Control");
+    relays.drive.turnOn();
+
+    delay(1000);
+    Serial.println("Activating Arm");
+    relays.arm.turnOn();
+
+    relays.updateError();
 }
 
 void loop() {
     serial.update();
     dataTimer.update();
-    relays.update();
+    // relays.update();
 }
 
 void sendData() {

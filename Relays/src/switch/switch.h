@@ -6,22 +6,18 @@
 
 /// @brief Define the Teensy pins for the relays [Subject to change]
 // Drive Motors
-const int bLeftRelayPin = 23;
-const int bLeftLedPin = 2;
-const int bRightRelayPin = 22;
-const int bRightLedPin = 3;
-const int fLeftRelayPin = 21;
-const int fLeftLedPin = 4;
-const int fRightRelayPin = 20;
-const int fRightLedPin = 5;
+const int bLeftRelayPin = 6;
+const int bRightRelayPin = 33;
+const int fLeftRelayPin = 5;
+const int fRightRelayPin = 9;
 
 // Arm, Science, and Drive
-const int armRelayPin = 37;
-const int armLedPin = 28;
-const int scienceRelayPin = 36;
-const int scienceLedPin = 29;
-const int driveRelayPin = 35;
-const int driveLedPin = 30;
+const int armRelayPin = 3;
+const int scienceRelayPin = 4;
+const int driveRelayPin = 2;
+
+// LEDs
+const int errorLED = 41;
 
 /// @brief Class to represent a relay on the relay board
 ///
@@ -37,7 +33,6 @@ const int driveLedPin = 30;
 class Relay {
     private: 
         int relayPin;
-        int ledPin;
         BoolState relayData;
         bool softwareState = false;        
 
@@ -45,9 +40,8 @@ class Relay {
         /// @brief Constructs a Relay object with specified output pin.
         /// @param outputPin The Teensy pin that the relay is connected to.
         /// @param ledPin The Teensy pin that the LED is connected to.
-        Relay(int relayPin, int ledPin) : 
-            relayPin(relayPin), 
-            ledPin(ledPin)
+        Relay(int relayPin) : 
+            relayPin(relayPin) 
             { }
         
         /// @brief Set up the relay by setting the pin mode
@@ -77,20 +71,21 @@ class Relay {
 /// instances of the Relay class for each relay and handles commands to
 /// update the state of the relays.
 class Relays {
-    private:
+    // private:
+    public:
         /// @brief Instantiate all RelaySwitch objects
         // Drive Motors
-        Relay backLeftMotor = Relay(bLeftRelayPin, bLeftLedPin);
-        Relay backRightMotor = Relay(bRightRelayPin, bRightLedPin);
-        Relay frontLeftMotor = Relay(fLeftRelayPin, fLeftLedPin);
-        Relay frontRightMotor = Relay(fRightRelayPin, fRightLedPin);
+        Relay backLeftMotor = Relay(bLeftRelayPin);
+        Relay backRightMotor = Relay(bRightRelayPin);
+        Relay frontLeftMotor = Relay(fLeftRelayPin);
+        Relay frontRightMotor = Relay(fRightRelayPin);
 
         // Arm, Science, and Drive
-        Relay arm = Relay(armRelayPin, armLedPin);
-        Relay science = Relay(scienceRelayPin, scienceLedPin);
-        Relay drive = Relay(driveRelayPin, driveLedPin);
+        Relay arm = Relay(armRelayPin);
+        Relay science = Relay(scienceRelayPin);
+        Relay drive = Relay(driveRelayPin);
 
-    public: 
+    // public: 
         /// @brief The data from each relay to be sent to the dashboard
         /// ON, OFF, or BOOL_UNDEFINED
         /// Initialized to BOOL_UNDEFINED for all relays
@@ -109,6 +104,9 @@ class Relays {
         /// @param command the command to be handled
         /// Sends each relay the relevant command to update the relay's software state
         void handleCommand(RelaysCommand command);
+
+        /// @brief Activate Error LED if any relays are off (Arm_on NAND Science_on NAND ... = )
+        void updateError();
 };
 
 #endif
