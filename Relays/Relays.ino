@@ -62,7 +62,7 @@ void setup() {
 void loop() {
     serial.update();
     dataTimer.update();
-    // relays.update();
+    relays.update();
 }
 
 void sendData() {

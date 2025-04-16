@@ -33,10 +33,11 @@ const int errorLED = 41;
 class Relay {
     private: 
         int relayPin;
-        BoolState relayData;
-        bool softwareState = false;        
+        BoolState relayData;        
 
     public: 
+        BoolState softwareState = BoolState_OPEN;
+
         /// @brief Constructs a Relay object with specified output pin.
         /// @param outputPin The Teensy pin that the relay is connected to.
         /// @param ledPin The Teensy pin that the LED is connected to.

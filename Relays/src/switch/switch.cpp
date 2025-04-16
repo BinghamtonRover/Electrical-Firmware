@@ -5,9 +5,9 @@ void Relay::setup() {
 }
 
 void Relay::update() {
-    if (softwareState) {
+    if (softwareState == BoolState_ON) {
         turnOn();
-    } else {
+    } else if (softwareState == BoolState_OFF) {
         turnOff();
     }
 }
@@ -24,11 +24,11 @@ void Relay::turnOff() {
 
 void Relay::handleCommand(BoolState command) { 
     switch (command) {
-        case BoolState_ON:
-            softwareState = true;
+        case BoolState_CLOSE:
+            softwareState = command;
             break;
-        case BoolState_OFF:
-            softwareState = false;
+        case BoolState_OPEN:
+            softwareState = command;
             break;
         case BoolState_BOOL_UNDEFINED:
             break;
@@ -77,6 +77,15 @@ void Relays::update() {
     arm.update();
     science.update();
     drive.update();
+
+    data.backLeftMotor = backLeftMotor.softwareState;
+    data.backRightMotor = backRightMotor.softwareState;
+    data.frontLeftMotor = frontLeftMotor.softwareState;
+    data.frontRightMotor = frontRightMotor.softwareState;
+    data.arm = arm.softwareState;
+    data.science = science.softwareState;
+    data.drive = drive.softwareState;
+
     updateError();
 }
 
