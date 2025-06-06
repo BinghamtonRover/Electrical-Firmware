@@ -8,3 +8,14 @@
 // This code is similar to the Drive voltage sensor code and uses it as an example
 
 class VoltageSensor
+{
+private:
+    int pin;    // Analog pin that will read the voltage sensor output
+
+public:
+    VoltageSensor(int pin);     // Constructing the VoltageSensor class
+
+    void setup();   // Sets up pin so it knows to read from the voltage sensor
+
+    float read();       // Reading voltage and returns it as a float
+}
