@@ -30,7 +30,6 @@ void loop() {
 
 void sendData() {
     serial.send(&relays.data);
-    serial.send(&VoltageSensor.data);
 }
 
 void handleCommand(const uint8_t* data, int length) {
