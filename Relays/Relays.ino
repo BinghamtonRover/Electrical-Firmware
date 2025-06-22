@@ -17,7 +17,7 @@ void setup() {
 
     Serial.println("Initializing hardware...");
     relays.setup();
-    VoltageSensor.setup();
+    voltageSensor.setup();
 
     Serial.println("Relays subsystem initialized");
 }
