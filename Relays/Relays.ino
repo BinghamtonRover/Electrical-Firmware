@@ -26,6 +26,7 @@ void loop() {
     serial.update();
     dataTimer.update();
     relays.update();
+    voltageSensor.update();
 }
 
 void sendData() {
