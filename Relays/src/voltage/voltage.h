@@ -13,9 +13,14 @@ private:
     int pin;    // Analog pin that will read the voltage sensor output
 
 public:
+    // data struct that is updated with voltage sensor data
+    RelaysData data;
+
     VoltageSensor(int pin);     // Constructing the VoltageSensor class
 
     void setup();   // Sets up pin so it knows to read from the voltage sensor
 
     float read();       // Reading voltage and returns it as a float
+
+    void update();      // Updates RelaysData with battery voltage
 }

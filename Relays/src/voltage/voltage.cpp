@@ -29,3 +29,8 @@ float VoltageSensor::read() // Reads voltage and returns the voltage of the batt
 
     return vbattery;
 }
+
+    void VoltageSensor::update()
+{
+    data.voltageData = read();
+}
