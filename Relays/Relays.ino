@@ -17,6 +17,7 @@ void setup() {
 
     Serial.println("Initializing hardware...");
     relays.setup();
+    voltageSensor.setup();
 
     Serial.println("Relays subsystem initialized");
 }
@@ -25,10 +26,12 @@ void loop() {
     serial.update();
     dataTimer.update();
     relays.update();
+    voltageSensor.update();
 }
 
 void sendData() {
     serial.send(&relays.data);
+    serial.send(&voltageSensor.data);
 }
 
 void handleCommand(const uint8_t* data, int length) {

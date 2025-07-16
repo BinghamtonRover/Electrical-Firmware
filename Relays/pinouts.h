@@ -6,6 +6,7 @@
 #include "src/relays.pb.h"
 
 Relays relays;
+VoltageSensor voltageSensor(40);
 
 
 #endif
