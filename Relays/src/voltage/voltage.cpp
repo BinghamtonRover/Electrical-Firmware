@@ -14,7 +14,7 @@ void VoltageSensor::setup() // Sets up the Teensy to read from the voltage senso
 
 float VoltageSensor::read() // Reads voltage and returns the voltage of the battery
 {
-    float raw;      // Declaring the variable for the voltage at the voltage sensor (this value is scaled down from battery voltage using a voltage divider)
+    int raw;      // Declaring the variable for the voltage at the voltage sensor (this value is scaled down from battery voltage using a voltage divider)
     float vbattery; // Declaring the variable for the voltage of the battery (scales the reading to match the battery voltage)
 
      //   analogReadResolution(10);       // Setting resolution of ADC to 10 bits (0 to 1023), however, this is the default resolution (for Teensy 4.1) so this line is commented out for now

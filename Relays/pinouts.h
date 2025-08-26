@@ -2,11 +2,11 @@
 #define PINOUTS_H
 
 #include "src/switch/switch.h"
+#include "src/voltage/voltage.h"
 #include "src/utils/BURT_utils.h"
 #include "src/relays.pb.h"
 
 Relays relays;
 VoltageSensor voltageSensor(40);
-
 
 #endif

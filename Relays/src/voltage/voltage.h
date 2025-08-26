@@ -1,4 +1,9 @@
+#ifndef VOLTAGE_H
+#define VOLTAGE_H
+
 #include <Arduino.h>
+
+#include "../relays.pb.h"
 
 // This is the header file for the voltage sensor on the relay board
 // The voltage sensor consists of a voltage divider where the power 
@@ -7,20 +12,23 @@
 
 // This code is similar to the Drive voltage sensor code and uses it as an example
 
-class VoltageSensor
-{
+class VoltageSensor {
 private:
-    int pin;    // Analog pin that will read the voltage sensor output
+	int pin; // Analog pin that will read the voltage sensor output
 
 public:
-    // data struct that is updated with voltage sensor data
-    RelaysData data;
+	// data struct that is updated with voltage sensor data
+	RelaysData data = RelaysData_init_default;
+	
+	VoltageSensor(int pin); // Constructing the VoltageSensor class
 
-    VoltageSensor(int pin);     // Constructing the VoltageSensor class
+	void setup(); // Sets up pin so it knows to read from the voltage sensor
 
-    void setup();   // Sets up pin so it knows to read from the voltage sensor
+	float read(); // Reading voltage and returns it as a float
 
-    float read();       // Reading voltage and returns it as a float
+	void update(); // Updates RelaysData with battery voltage
 
-    void update();      // Updates RelaysData with battery voltage
-}
+	// RelaysData data = RelaysData_init_zero;
+};
+
+#endif
