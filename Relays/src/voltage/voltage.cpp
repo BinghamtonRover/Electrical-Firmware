@@ -3,9 +3,9 @@
 // This cpp file is for the voltage sensor on the relay board, check the header file for a description of the sensor
 // Assumes volage is being read using a digital reading from a 10-bit ADC converter
 
-const float analRes = 1023.0;  // analog read resolution (for 10 bits, 0 - 1023)
-const float vRange = 3.3;    // voltage range for Teensy 0 - 3.3V
-const float vDivScale = 11.0;    // voltage divider scale
+const float ANAL_RES = 1023.0;  // analog read resolution (for 10 bits, 0 - 1023)
+const float V_RANGE = 3.3;    // voltage range for Teensy 0 - 3.3V
+const float VDIV_SCALE = 11.0;    // voltage divider scale
 
 // note: should use floats to prevent integer division
 
@@ -29,8 +29,8 @@ float VoltageSensor::read() // Reads voltage and returns the voltage of the batt
     raw = analogRead(pin); // Reading the raw value of the pin, this value will be between 0 and 1023 and needs to be scaled to the actual voltage value
                            //  analogReference(DEFAULT);   // Sets the maximum voltgae that can be read (i.e. 3.3V = 1023); this does nothing on the Teensy so this line is commented
 
-    vbattery = (raw / analRes) * vRange;      // Scaling the analog value (0 - 1023) to the corresponding voltage between 0 and 3.3V
-    vbattery = vbattery * vDivScale;           // Scaling the voltage sensor(divider) voltage (0 - 3.3V) to battery voltage (0 - 24V)
+    vbattery = (raw / ANAL_RES) * V_RANGE;      // Scaling the analog value (0 - 1023) to the corresponding voltage between 0 and 3.3V
+    vbattery = vbattery * VDIV_SCALE;           // Scaling the voltage sensor(divider) voltage (0 - 3.3V) to battery voltage (0 - 24V)
 
                                         // Given the current voltage divider, the actual pin voltage shouldn't exceed ~2.2V since that scales to ~24V on the battery
 
